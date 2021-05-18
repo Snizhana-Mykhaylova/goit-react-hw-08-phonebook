@@ -25,7 +25,7 @@ class App extends Component {
         <AppBar>
           <Bar />
         </AppBar>
-        <Suspense fallback={<p>Загружаем...</p>}>
+        <Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <Route exact path="/" component={HomeView} />
             <PublicRoute
