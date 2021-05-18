@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styles from './contacts.module.css';
 import operations from '../../redux/phonebook/phonebook-operations';
 import * as selectors from '../../redux/phonebook/phonebook-selectors';
+import { Button } from '@material-ui/core';
 
 const phoneFormatter = require('phone-formatter');
 
@@ -11,16 +12,13 @@ const Contacts = ({ contacts, onDeleteContact }) => {
     <ul>
       {contacts.map(contact => (
         <li className={styles.contactItem} key={contact.id}>
-          {contact.name}:
+          <span>{contact.name}:</span>
           <span className={styles.number}>
             {phoneFormatter.format(contact.number, 'NNN-NN-NN')}
           </span>
-          <button
-            className={styles.button}
-            onClick={() => onDeleteContact(contact.id)}
-          >
+          <Button color="primary" onClick={() => onDeleteContact(contact.id)}>
             Delete
-          </button>
+          </Button>
         </li>
       ))}
     </ul>

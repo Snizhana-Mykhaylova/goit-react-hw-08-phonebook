@@ -1,10 +1,7 @@
 import React, { Component, Suspense, lazy } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import AppBar from './components/AppBar';
-// import ContactsView from './views/ContactsView';
-// import HomeView from './views/HomeView';
-// import RegisterView from './views/RegisterView';
-// import LoginView from './views/LoginView';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Bar from './components/Bar';
 import Container from './components/Container';
 import { authOperations } from './redux/auth';
 import { connect } from 'react-redux';
@@ -25,8 +22,9 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <AppBar />
-
+        <AppBar>
+          <Bar />
+        </AppBar>
         <Suspense fallback={<p>Загружаем...</p>}>
           <Switch>
             <Route exact path="/" component={HomeView} />
@@ -47,6 +45,7 @@ class App extends Component {
               component={ContactsView}
               redirectTo="/login"
             />
+            <Redirect to="/" />
           </Switch>
         </Suspense>
       </Container>

@@ -2,38 +2,59 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { authSelectors } from '../redux/auth';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = {
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
   link: {
     display: 'inline-block',
     textDecoration: 'none',
     padding: 12,
     fontWeight: 700,
-    color: '#2A363B',
+    color: 'white',
   },
-  activeLink: {
-    color: '#E84A5F',
-  },
-};
+}));
 
-const Navigation = ({ isAuthenticated }) => (
-  <nav>
-    <NavLink to="/" exact style={styles.link} activeStyle={styles.activeLink}>
-      Главная
-    </NavLink>
-
-    {isAuthenticated && (
+const Navigation = ({ isAuthenticated }) => {
+  const classes = useStyles();
+  return (
+    <nav>
       <NavLink
-        to="/contacts"
+        to="/"
         exact
-        style={styles.link}
-        activeStyle={styles.activeLink}
+        className={classes.link}
+        activeStyle={{
+          backgroundColor: 'white',
+          color: '#3f51b5',
+        }}
       >
-        Контакты
+        Home
       </NavLink>
-    )}
-  </nav>
-);
+
+      {isAuthenticated && (
+        <NavLink
+          to="/contacts"
+          exact
+          className={classes.link}
+          activeStyle={{
+            backgroundColor: 'white',
+            color: '#3f51b5',
+          }}
+        >
+          Contacts
+        </NavLink>
+      )}
+    </nav>
+  );
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: authSelectors.getIsAuthenticated(state),

@@ -7,8 +7,6 @@ import Contacts from '../components/Contacts';
 import Filter from '../components/Filter';
 import * as selectors from '../redux/phonebook/phonebook-selectors';
 
-import '../common.css';
-
 class ContactsView extends Component {
   componentDidMount() {
     this.props.fetchContact();

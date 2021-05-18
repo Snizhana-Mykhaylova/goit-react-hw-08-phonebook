@@ -1,20 +1,27 @@
 import { connect } from 'react-redux';
 import * as actions from '../../redux/phonebook/phonebook-actions';
 import * as selectors from '../../redux/phonebook/phonebook-selectors';
-
 import PropTypes from 'prop-types';
-import styles from './filter.module.css';
+import TextField from '@material-ui/core/TextField';
+
+const styles = {
+  input: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: 20,
+    width: 400,
+  },
+};
 
 const Filter = ({ value, onChange }) => (
-  <label>
-    Find contacts by name
-    <input
-      className={styles.input}
-      type="text"
-      value={value}
-      onChange={onChange}
-    />
-  </label>
+  <TextField
+    style={styles.input}
+    label="Find contacts by name"
+    variant="filled"
+    type="text"
+    value={value}
+    onChange={onChange}
+  />
 );
 const mapStateToProps = state => ({ value: selectors.getFilter(state) });
 
